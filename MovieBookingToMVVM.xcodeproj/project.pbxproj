@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C5C5F492D6734B300A12ADE /* ShowtimeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C5F482D6734B300A12ADE /* ShowtimeCellViewModel.swift */; };
+		5C5C5F4B2D68757F00A12ADE /* SheetDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C5F4A2D68757F00A12ADE /* SheetDBService.swift */; };
 		5C65ED232D65D4470080A314 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65ED222D65D4470080A314 /* ImageLoaderService.swift */; };
 		5C65ED252D65D5290080A314 /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65ED242D65D5290080A314 /* MovieCellViewModel.swift */; };
 		5C6EC0FB2D0C319F00E7D767 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6EC0FA2D0C319F00E7D767 /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		5C5C5F482D6734B300A12ADE /* ShowtimeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowtimeCellViewModel.swift; sourceTree = "<group>"; };
+		5C5C5F4A2D68757F00A12ADE /* SheetDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDBService.swift; sourceTree = "<group>"; };
 		5C65ED222D65D4470080A314 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		5C65ED242D65D5290080A314 /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		5C6EC0F72D0C319F00E7D767 /* MovieBookingToMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBookingToMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				5C65ED222D65D4470080A314 /* ImageLoaderService.swift */,
+				5C5C5F4A2D68757F00A12ADE /* SheetDBService.swift */,
 				5C6EC1102D0C320C00E7D767 /* NetworkLayer.swift */,
 			);
 			path = Services;
@@ -225,6 +228,7 @@
 				5C6EC1132D0C323700E7D767 /* MovieListViewModel.swift in Sources */,
 				5C6EC0FF2D0C319F00E7D767 /* MovieListViewController.swift in Sources */,
 				5C6EC0FB2D0C319F00E7D767 /* AppDelegate.swift in Sources */,
+				5C5C5F4B2D68757F00A12ADE /* SheetDBService.swift in Sources */,
 				5C6EC1182D0C333F00E7D767 /* MovieDetailViewModel.swift in Sources */,
 				5C5C5F492D6734B300A12ADE /* ShowtimeCellViewModel.swift in Sources */,
 				5C6EC1222D116B2600E7D767 /* SeatLayoutViewController.swift in Sources */,

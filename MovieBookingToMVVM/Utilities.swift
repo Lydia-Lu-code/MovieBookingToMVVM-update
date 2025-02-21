@@ -113,3 +113,42 @@ extension String {
         NSLocalizedString(self, comment: "")
     }
 }
+
+enum PriceCalculator {
+    static func calculateTotalAmount(
+        ticketType: String,
+        peopleCount: Int
+    ) -> Int {
+        let basePrice = 280
+        let packageExtra = 120
+        let isPackage = ticketType == "套餐票"
+        return peopleCount * (basePrice + (isPackage ? packageExtra : 0))
+    }
+}
+
+class RateLimiter {
+    private let queue = DispatchQueue(label: "com.moviebooking.ratelimiter")
+    private var lastRequestTime: Date?
+    private let minimumInterval: TimeInterval
+    
+    init(minimumInterval: TimeInterval = 1.0) {
+        self.minimumInterval = minimumInterval
+    }
+    
+    func throttle(block: @escaping () -> Void) {
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            
+            let now = Date()
+            if let lastTime = self.lastRequestTime,
+               now.timeIntervalSince(lastTime) < self.minimumInterval {
+                Thread.sleep(forTimeInterval: self.minimumInterval)
+            }
+            
+            DispatchQueue.main.async {
+                block()
+                self.lastRequestTime = Date()
+            }
+        }
+    }
+}

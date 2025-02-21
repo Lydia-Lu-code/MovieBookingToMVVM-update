@@ -203,5 +203,12 @@ class SeatLayoutViewModel: SeatLayoutViewModelProtocol {
         )
     }
 
+    // 如果需要，可以保留總金額計算的輔助方法
+    func calculateTotalAmount() -> Int {
+        let currentPrice = ticketType.price
+        return selectedSeats.count * currentPrice
+    }
+    
+    
 }
 

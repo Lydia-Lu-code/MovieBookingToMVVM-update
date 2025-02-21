@@ -415,22 +415,46 @@ extension SeatLayoutViewController {
         viewModel.setMovieData(movieData)
     }
     
-    // updateCheckoutButtonTapped 方法中使用 viewModel.prepareBookingData()
     @objc private func updateCheckoutButtonTapped() {
         guard !viewModel.selectedSeats.isEmpty else {
-            AlertHelper.showAlert(in: self, message: "請先選擇座位")
+            AlertHelper.showAlert(
+                in: self,
+                message: "請先選擇座位"
+            )
             return
         }
         
-        let bookingData = viewModel.prepareBookingData()  // 使用 ViewModel 的方法
+        let bookingData = viewModel.prepareBookingData()
         
+        // 顯示載入指示器
+        LoadingIndicator.show(in: view)
         
-        // 1. 先上傳到 SheetDB
-        uploadToSheetDB(bookingData: bookingData)
+        // 1. 上傳到 SheetDB
+        SheetDBService.uploadBookingData(
+            bookingData: bookingData,
+            viewController: self
+        ) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                // SheetDB 上傳成功
+                self.handleUploadSuccess()
+            case .failure(let error):
+                // SheetDB 上傳失敗
+                AlertHelper.showError(
+                    in: self,
+                    error: error
+                )
+            }
+        }
         
         // 2. 上傳到 Google Drive
         googleDriveViewModel.uploadBookingData(bookingData: bookingData) { [weak self] result in
             guard let self = self else { return }
+            
+            // 隱藏載入指示器
+            LoadingIndicator.hide()
             
             switch result {
             case .success:
@@ -444,26 +468,9 @@ extension SeatLayoutViewController {
                 )
             }
         }
-        
-        // 3. 使用 APIService 進行訂票
-        apiService.createBooking(bookingData) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let booking):
-                // 由於已經在 Google Drive 上傳成功時處理了成功訊息，這裡不需要重複顯示
-                print("API 訂票成功：\(booking.id)")
-            case .failure(let error):
-                AlertHelper.showAlert(
-                    in: self,
-                    title: "訂票失敗",
-                    message: error.localizedDescription
-                )
-            }
-        }
     }
     
-
+    
 }
 
 

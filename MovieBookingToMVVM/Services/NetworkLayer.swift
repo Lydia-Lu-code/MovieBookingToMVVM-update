@@ -1,8 +1,3 @@
-//
-//  NetworkLayer.swift
-//  MovieBookingToMVVM
-//
-
 import Foundation
 
 // MARK: - Network Errors
@@ -167,4 +162,3 @@ final class APIService: APIServiceProtocol {
         task.resume()
     }
 }
-
