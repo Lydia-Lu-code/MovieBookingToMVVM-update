@@ -1,5 +1,5 @@
 import Foundation
-
+import UIKit
 
 class MovieDetailViewModel {
     // MARK: - Types
@@ -13,6 +13,8 @@ class MovieDetailViewModel {
     // MARK: - Properties
     private let movieId: Int
     private let apiService: APIServiceProtocol
+    private let imageLoader: ImageLoaderServiceProtocol
+        
     
     private var state: State {
         didSet {
@@ -42,9 +44,12 @@ class MovieDetailViewModel {
     }
     
     // MARK: - Initialization
-    init(movieId: Int, apiService: APIServiceProtocol = APIService()) {
+    init(movieId: Int,
+         apiService: APIServiceProtocol = APIService(),
+         imageLoader: ImageLoaderServiceProtocol = ImageLoaderService()) {  // 新增參數
         self.movieId = movieId
         self.apiService = apiService
+        self.imageLoader = imageLoader  // 新增這行
         self.state = State(movie: nil, isLoading: false, error: nil, posterURL: nil)
     }
     
@@ -64,47 +69,14 @@ class MovieDetailViewModel {
             }
         }
     }
+    
+    func loadPosterImage(completion: @escaping (UIImage?) -> Void) {
+        guard let url = state.posterURL else {
+            completion(nil)
+            return
+        }
+        imageLoader.loadImage(from: url.absoluteString, completion: completion)
+    }
+    
 }
 
-//// MARK: - ImageLoaderServiceProtocol
-//protocol ImageLoaderServiceProtocol {
-//    func loadImageData(from urlString: String, completion: @escaping (Data?) -> Void)
-//}
-
-//import Foundation
-//
-//class MovieDetailViewModel {
-//    let movieId: Int
-//    private let apiService: APIServiceProtocol
-//    private var movie: Movie?
-//    
-//    private(set) var movieTitle: String?
-//    
-//    var updateUI: ((Movie) -> Void)?
-//    var showError: ((String) -> Void)?
-//    
-//    init(movieId: Int, movieTitle: String? = nil, apiService: APIServiceProtocol = APIService()) {
-//        self.movieId = movieId
-//        self.movieTitle = movieTitle
-//        self.apiService = apiService
-//    }
-//    
-//    func fetchMovieDetail() {
-//        apiService.fetchMovieDetail(id: movieId) { [weak self] result in
-//            switch result {
-//            case .success(let movie):
-//                self?.movie = movie
-//                self?.movieTitle = movie.title
-//                self?.updateUI?(movie)
-//            case .failure(let error):
-//                self?.showError?(error.localizedDescription)
-//            }
-//        }
-//    }
-//    // 取得電影名稱的方法
-//    func getMovieTitle() -> String {
-//        return movieTitle ?? "預設電影名稱"
-//    }
-//    
-// 
-//}

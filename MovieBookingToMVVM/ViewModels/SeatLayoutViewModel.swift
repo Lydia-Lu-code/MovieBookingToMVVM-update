@@ -47,12 +47,6 @@ protocol SeatLayoutViewModelProtocol {
 }
 
 
-//protocol SeatLayoutConfigurationProtocol {
-//    var numberOfRows: Int { get }
-//    var seatsPerRow: Int { get }
-//    var ticketPrice: Int { get }
-//}
-
 class SeatLayoutViewModel: SeatLayoutViewModelProtocol {
     
     private var movieData: MovieData?

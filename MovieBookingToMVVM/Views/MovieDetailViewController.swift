@@ -92,20 +92,7 @@ class MovieDetailViewController: UIViewController {
         self.imageLoader = imageLoader
         super.init(nibName: nil, bundle: nil)
     }
-    
-//    private func setupBindings() {
-//        viewModel.stateDidChange = { [weak self] state in
-//            DispatchQueue.main.async {
-//                self?.updateUI(with: state)
-//            }
-//        }
-//    }
-    
-//    init(viewModel: MovieDetailViewModel) {
-//        self.viewModel = viewModel
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
+        
     required init?(coder: NSCoder) {
         self.viewModel = MovieDetailViewModel(movieId: 0)
         self.imageLoader = ImageLoaderService()  // 加入預設值
@@ -146,25 +133,6 @@ class MovieDetailViewController: UIViewController {
         setupConstraints()
     }
     
-//    private func setupUI() {
-//        view.backgroundColor = .systemBackground
-//        navigationItem.largeTitleDisplayMode = .never
-//        
-//        // Add subviews
-//        view.addSubview(scrollView)
-//        scrollView.addSubview(contentView)
-//        
-//        // 移除 showTimesButton，只添加其他視圖
-//        [posterImageView, titleLabel, releaseDateLabel, durationLabel,
-//         overviewTitleLabel, overviewLabel].forEach { contentView.addSubview($0) }
-//        
-//        // 將按鈕直接添加到主視圖
-//        view.addSubview(showTimesButton)
-//        view.addSubview(activityIndicator)
-//        
-//        // Add target
-//        showTimesButton.addTarget(self, action: #selector(showTimesButtonTapped), for: .touchUpInside)
-//    }
     
     private func setupConstraints() {
        let contentGuide = contentView.layoutMarginsGuide
@@ -225,21 +193,6 @@ class MovieDetailViewController: UIViewController {
        ])
     }
     
-
-    
-//    private func setupBindings() {
-//        viewModel.updateUI = { [weak self] movie in
-//            DispatchQueue.main.async {
-//                self?.updateUI(with: movie)
-//            }
-//        }
-//        
-//        viewModel.showError = { [weak self] error in
-//            DispatchQueue.main.async {
-//                self?.showError(message: error)
-//            }
-//        }
-//    }
     
     // MARK: - UI Updates
     private func setupBindings() {
@@ -276,41 +229,6 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
-//    private func updateUI(with movie: Movie) {
-//        activityIndicator.stopAnimating()
-//        
-//        titleLabel.text = movie.title
-//        releaseDateLabel.text = "上映日期：\(movie.releaseDate)"
-//        durationLabel.text = movie.duration.map { "\($0) 分鐘" } ?? "時長未知"
-//        overviewLabel.text = movie.overview
-//        
-//        // Load poster image
-//        if let posterPath = movie.posterPath {
-//            loadImage(from: posterPath)
-//        }
-//    }
-    
-
-    private func loadImage(from path: String) {
-        let baseURL = "https://image.tmdb.org/t/p/w500"
-        guard let url = URL(string: baseURL + path) else { return }
-
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.posterImageView.image = image
-                }
-            }
-        }.resume()
-    }
-
-    private func showError(message: String) {
-        activityIndicator.stopAnimating()
-
-        let alert = UIAlertController(title: "錯誤", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default))
-        present(alert, animated: true)
-    }
 
     @objc internal func showTimesButtonTapped() {
         let movieTitle = viewModel.displayTitle
@@ -321,14 +239,6 @@ class MovieDetailViewController: UIViewController {
         navigationController?.pushViewController(showtimeVC, animated: true)
     }
     
-//    @objc internal func showTimesButtonTapped() {
-//        let movieTitle = viewModel.getMovieTitle()
-//        print("MovieDetail - 傳送電影名稱: \(movieTitle)")
-//
-//        let showtimeViewModel = ShowtimeSelectionViewModel(movieTitle: movieTitle)
-//        let showtimeVC = ShowtimeSelectionViewController(viewModel: showtimeViewModel)
-//        navigationController?.pushViewController(showtimeVC, animated: true)
-//    }
 
 
     func configure(with movieId: Int) {

@@ -2,29 +2,43 @@
 //  ShowtimeSelectionViewModel.swift
 //  MovieBookingToMVVM
 //
-//  Created by Lydia Lu on 2024/12/18.
-//
 
 import Foundation
 
 class ShowtimeSelectionViewModel {
-    let movieTitle: String
+    // MARK: - Types
+    struct State {
+        var selectedDate: Date?
+        var selectedShowtime: ShowtimeModel?
+        var showtimes: [ShowtimeModel]
+        var isButtonEnabled: Bool
+        var shouldShowAlert: Bool
+    }
     
     // MARK: - Properties
+    let movieTitle: String
     private let calendar = Calendar.current
-    private(set) var selectedDate: Date?
-    private(set) var selectedShowtime: ShowtimeModel?
     
-    var showtimes: [ShowtimeModel] = []
-    var showAlert: (() -> Void)?
-    
-    init(movieTitle: String) {
-        self.movieTitle = movieTitle
+    private(set) var state: State {
+        didSet {
+            stateDidChange?(state)
+        }
     }
     
     // MARK: - Outputs
-    var updateShowtimes: (([ShowtimeModel]) -> Void)?
-    var updateSelectSeatButtonState: ((Bool) -> Void)?
+    var stateDidChange: ((State) -> Void)?
+    
+    // MARK: - Initialization
+    init(movieTitle: String) {
+        self.movieTitle = movieTitle
+        self.state = State(
+            selectedDate: nil,
+            selectedShowtime: nil,
+            showtimes: [],
+            isButtonEnabled: false,
+            shouldShowAlert: false
+        )
+    }
     
     // MARK: - Calendar Configuration
     var availableDateRange: DateInterval {
@@ -33,28 +47,35 @@ class ShowtimeSelectionViewModel {
         return DateInterval(start: today, end: sevenDaysLater)
     }
     
-    // 修改選座按鈕的動作檢查
+    // MARK: - Public Methods
+    func selectDate(_ date: Date) {
+        state.selectedDate = date
+        state.selectedShowtime = nil
+        state.isButtonEnabled = false
+        
+        // 在實際應用中，這裡可能需要從API獲取該日期的場次
+        state.showtimes = createShowtimes(for: date)
+    }
+    
+    func selectShowtime(_ showtime: ShowtimeModel) {
+        state.selectedShowtime = showtime
+        state.isButtonEnabled = true
+    }
+    
+    
+    
     func canProceedToSeatSelection() -> Bool {
-        if selectedShowtime == nil {
-            showAlert?()
+        guard state.selectedShowtime != nil else {
+            state.shouldShowAlert = true
+            stateDidChange?(state)
+            state.shouldShowAlert = false  // Reset alert state
             return false
         }
         return true
     }
     
-    // MARK: - Public Methods
-    func selectDate(_ date: Date) {
-        selectedDate = date
-        selectedShowtime = nil
-
-        // 在實際應用中，這裡可能需要從API獲取該日期的場次
-        showtimes = createShowtimes(for: date)
-        updateShowtimes?(showtimes)
-    }
-    
-    func selectShowtime(_ showtime: ShowtimeModel) {
-        selectedShowtime = showtime
-        updateSelectSeatButtonState?(true)
+    func createCellViewModel(for showtime: ShowtimeModel) -> ShowtimeCellViewModel {
+        ShowtimeCellViewModel(showtime: showtime)
     }
     
     // MARK: - Private Methods

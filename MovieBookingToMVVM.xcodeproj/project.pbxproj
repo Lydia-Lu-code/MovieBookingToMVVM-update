@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C5C5F492D6734B300A12ADE /* ShowtimeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C5F482D6734B300A12ADE /* ShowtimeCellViewModel.swift */; };
 		5C65ED232D65D4470080A314 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65ED222D65D4470080A314 /* ImageLoaderService.swift */; };
 		5C65ED252D65D5290080A314 /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65ED242D65D5290080A314 /* MovieCellViewModel.swift */; };
 		5C6EC0FB2D0C319F00E7D767 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6EC0FA2D0C319F00E7D767 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C5C5F482D6734B300A12ADE /* ShowtimeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowtimeCellViewModel.swift; sourceTree = "<group>"; };
 		5C65ED222D65D4470080A314 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		5C65ED242D65D5290080A314 /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		5C6EC0F72D0C319F00E7D767 /* MovieBookingToMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBookingToMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C5C5F462D67272900A12ADE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C6EC10E2D0C31DD00E7D767 /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5C5C5F472D672A1A00A12ADE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5C65ED222D65D4470080A314 /* ImageLoaderService.swift */,
+				5C6EC1102D0C320C00E7D767 /* NetworkLayer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		5C6EC0EE2D0C319F00E7D767 = {
 			isa = PBXGroup;
 			children = (
@@ -88,12 +107,11 @@
 			children = (
 				5C6EC0FA2D0C319F00E7D767 /* AppDelegate.swift */,
 				5C6EC0FC2D0C319F00E7D767 /* SceneDelegate.swift */,
-				5C6EC1102D0C320C00E7D767 /* NetworkLayer.swift */,
+				5C5C5F472D672A1A00A12ADE /* Services */,
+				5C5C5F462D67272900A12ADE /* Models */,
 				5C6EC1332D19237C00E7D767 /* Utilities.swift */,
-				5C6EC10E2D0C31DD00E7D767 /* Models.swift */,
-				5C65ED222D65D4470080A314 /* ImageLoaderService.swift */,
-				5C6EC1162D0C331100E7D767 /* Views */,
 				5C6EC1192D0C335000E7D767 /* ViewModels */,
+				5C6EC1162D0C331100E7D767 /* Views */,
 				5C6EC1002D0C319F00E7D767 /* Main.storyboard */,
 				5C6EC1032D0C31A000E7D767 /* Assets.xcassets */,
 				5C6EC1052D0C31A000E7D767 /* LaunchScreen.storyboard */,
@@ -105,12 +123,12 @@
 		5C6EC1162D0C331100E7D767 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5C6EC1142D0C32F200E7D767 /* MovieCell.swift */,
 				5C6EC0FE2D0C319F00E7D767 /* MovieListViewController.swift */,
 				5C6EC11A2D0C340100E7D767 /* MovieDetailViewController.swift */,
 				5C6EC12B2D12C67600E7D767 /* ShowtimeSelectionViewController.swift */,
-				5C6EC1212D116B2600E7D767 /* SeatLayoutViewController.swift */,
-				5C6EC1142D0C32F200E7D767 /* MovieCell.swift */,
 				5C6EC12D2D12C6AD00E7D767 /* ShowtimeCell.swift */,
+				5C6EC1212D116B2600E7D767 /* SeatLayoutViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,6 +140,7 @@
 				5C6EC1122D0C323700E7D767 /* MovieListViewModel.swift */,
 				5C6EC1172D0C333F00E7D767 /* MovieDetailViewModel.swift */,
 				5C6EC1292D12C65500E7D767 /* ShowtimeSelectionViewModel.swift */,
+				5C5C5F482D6734B300A12ADE /* ShowtimeCellViewModel.swift */,
 				5C6EC1272D12A27200E7D767 /* SeatLayoutViewModel.swift */,
 				5C6EC1312D14244500E7D767 /* GoogleDriveViewModel.swift */,
 			);
@@ -207,6 +226,7 @@
 				5C6EC0FF2D0C319F00E7D767 /* MovieListViewController.swift in Sources */,
 				5C6EC0FB2D0C319F00E7D767 /* AppDelegate.swift in Sources */,
 				5C6EC1182D0C333F00E7D767 /* MovieDetailViewModel.swift in Sources */,
+				5C5C5F492D6734B300A12ADE /* ShowtimeCellViewModel.swift in Sources */,
 				5C6EC1222D116B2600E7D767 /* SeatLayoutViewController.swift in Sources */,
 				5C6EC1322D14244500E7D767 /* GoogleDriveViewModel.swift in Sources */,
 				5C6EC0FD2D0C319F00E7D767 /* SceneDelegate.swift in Sources */,

@@ -5,7 +5,7 @@
 
 import UIKit
 
-// MARK: - UI Helpers
+// MARK: - Alert Helper
 enum AlertHelper {
     static func showAlert(
         in viewController: UIViewController,
@@ -43,6 +43,7 @@ enum AlertHelper {
     }
 }
 
+// MARK: - Loading Indicator
 enum LoadingIndicator {
     private static var activityIndicator: UIActivityIndicatorView?
     
@@ -62,7 +63,7 @@ enum LoadingIndicator {
     }
 }
 
-// MARK: - UI Component Extensions
+// MARK: - UIStackView Extension
 extension UIStackView {
     static func createVertical(
         spacing: CGFloat,
@@ -89,7 +90,7 @@ extension UIStackView {
     }
 }
 
-// MARK: - Date Formatting
+// MARK: - Date Extension
 extension Date {
     func formatted(with format: String) -> String {
         let formatter = DateFormatter()
@@ -106,10 +107,9 @@ extension Date {
     }
 }
 
-// MARK: - String Extensions
+// MARK: - String Extension
 extension String {
     var localized: String {
         NSLocalizedString(self, comment: "")
     }
 }
-

@@ -1,18 +1,17 @@
 //
-//  MovieListViewModel.swift
+//  ImageLoaderService.swift
 //  MovieBookingToMVVM
-//
-//  Created by Lydia Lu on 2025/2/19.
 //
 
 import Foundation
 import UIKit
 
-// MARK: - ImageLoader Service
+// MARK: - ImageLoader Service Protocol
 protocol ImageLoaderServiceProtocol {
     func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void)
 }
 
+// MARK: - ImageLoader Service Implementation
 class ImageLoaderService: ImageLoaderServiceProtocol {
     private let cache = NSCache<NSString, UIImage>()
     
@@ -46,3 +45,4 @@ class ImageLoaderService: ImageLoaderServiceProtocol {
         }.resume()
     }
 }
+

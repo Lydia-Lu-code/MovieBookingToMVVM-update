@@ -20,7 +20,6 @@ class SeatLayoutViewController: UIViewController {
     private let googleDriveViewModel: GoogleDriveViewModel
     
     private let apiService: APIServiceProtocol
-//    private let googleDriveViewModel: GoogleDriveViewModel
     
     init(
         viewModel: SeatLayoutViewModelProtocol = SeatLayoutViewModel(),
@@ -403,55 +402,6 @@ class SeatLayoutViewController: UIViewController {
             }
         }
 
-// MARK: - Booking Data Manager
-//extension SeatLayoutViewController {
-//    
-//    /// 訂票資料管理器
-//    class BookingDataManager {
-//        static let shared = BookingDataManager()
-//        
-//        private init() {}
-//        
-//        var movieName: String = ""
-//        var showDate: Date?
-//        var showTime: String = ""
-//    }
-//    
-//    /// 設定電影和場次資訊
-//    func setMovieAndShowtime(movieName: String, showDate: Date, showTime: String) {
-//        print("SeatLayout - 接收訂票資料")
-//        print("電影名稱: \(movieName)")
-//        print("場次日期: \(showDate)")
-//        print("場次時間: \(showTime)")
-//        
-//        let manager = BookingDataManager.shared
-//        manager.movieName = movieName
-//        manager.showDate = showDate
-//        manager.showTime = showTime
-//    }
-//    
-//    
-//    /// 更新訂票資料準備方法
-//    func prepareBookingDataWithDetails() -> BookingData {
-//        let selectedSeats = viewModel.getSelectedSeats()
-//        let seatLabels = selectedSeats.map { seat in
-//            let rowLabel = String(UnicodeScalar("A".unicodeScalars.first!.value + UInt32(seat.row))!)
-//            return "\(rowLabel)\(seat.column + 1)"
-//        }
-//        
-//        let manager = BookingDataManager.shared
-//        
-//        return BookingData(
-//            movieName: manager.movieName,
-//            showDate: manager.showDate ?? Date(),
-//            showTime: manager.showTime,
-//            peopleCount: selectedSeats.count,
-//            ticketType: viewModel.getTicketTypeText(),
-//            notes: seatLabels.joined(separator: "、")
-//        )
-//    }
-//}
-
 // MARK: - Booking Data Setup Extension
 extension SeatLayoutViewController {
     /// 在 viewDidLoad 中調用
@@ -512,35 +462,6 @@ extension SeatLayoutViewController {
             }
         }
     }
-    
-//    @objc private func updateCheckoutButtonTapped() {
-//        guard !viewModel.selectedSeats.isEmpty else {
-//            AlertHelper.showAlert(in: self, message: "請先選擇座位")
-//            return
-//        }
-//        
-//        let bookingData = prepareBookingDataWithDetails()
-//        uploadToSheetDB(bookingData: bookingData)
-//        
-//        googleDriveViewModel.uploadBookingData(bookingData: bookingData) { [weak self] result in
-//            guard let self = self else { return }
-//            
-//            switch result {
-//            case .success:
-//                AlertHelper.showAlert(
-//                    in: self,
-//                    title: "訂票成功",
-//                    message: "您的訂票已成功儲存"
-//                )
-//            case .failure(let error):
-//                AlertHelper.showAlert(
-//                    in: self,
-//                    title: "訂票失敗",
-//                    message: error.localizedDescription
-//                )
-//            }
-//        }
-//    }
     
 
 }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-// 電影相關模型
+// MARK: - Movie Models
 struct Movie: Codable {
     let id: Int
     let title: String
@@ -25,11 +25,15 @@ struct Movie: Codable {
     
     var posterURL: URL? {
         guard let path = posterPath else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+        return URL(string: "\(APIConfig .imageBaseURL)\(path)")
     }
 }
 
-// 電影資料模型
+struct MovieResponse: Codable {
+    let results: [Movie]
+}
+
+// MARK: - Movie Data Model
 struct MovieData {
     let name: String
     let date: Date
@@ -42,7 +46,7 @@ struct MovieData {
     )
 }
 
-// 場次相關模型
+// MARK: - ShowTime Models
 struct ShowTime: Codable {
     let id: Int
     let movieId: Int
@@ -63,7 +67,7 @@ struct ShowtimeDateModel {
     let showtimes: [ShowtimeModel]
 }
 
-// 座位相關模型
+// MARK: - Seat Models
 struct Seat: Codable {
     let row: String
     let number: Int
@@ -81,7 +85,13 @@ struct SeatLayout {
     }
 }
 
-// 訂票相關模型
+enum SeatLayoutStatus {
+    case available
+    case occupied
+    case selected
+}
+
+// MARK: - Booking Models
 struct Booking: Codable {
     let id: Int
     let showTimeId: Int
@@ -108,22 +118,13 @@ struct BookingData: Codable {
     }
 }
 
-// MARK: - Enums
-enum SeatLayoutStatus {
-    case available
-    case occupied
-    case selected
-}
-
-// MARK: - Protocols
-// 座位版面配置協議
+// MARK: - Seat Layout Configuration
 protocol SeatLayoutConfigurationProtocol {
     var numberOfRows: Int { get }
     var seatsPerRow: Int { get }
     var ticketPrice: Int { get }
 }
 
-// MARK: - Configurations
 struct SeatLayoutConfiguration: SeatLayoutConfigurationProtocol {
     let numberOfRows: Int
     let seatsPerRow: Int
@@ -134,9 +135,4 @@ struct SeatLayoutConfiguration: SeatLayoutConfigurationProtocol {
         seatsPerRow: 10,
         ticketPrice: 280
     )
-}
-
-// MARK: - API Response Models
-struct MovieResponse: Codable {
-    let results: [Movie]
 }
